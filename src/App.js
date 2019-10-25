@@ -1,14 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+import BackgroundImage from './components/BackgroundImage'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <BackgroundImage />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome on Kaygu.be
         </p>
         <a
           className="App-link"
