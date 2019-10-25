@@ -1,12 +1,10 @@
 import React from 'react';
 import BackgroundImage from './components/BackgroundImage'
-import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <BackgroundImage />
         <p>
           Welcome on Kaygu.be
         </p>
