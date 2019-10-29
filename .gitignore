@@ -1,5 +1,5 @@
 # dependencies
-server/node_modules/
+controllers/node_modules/
 client/node_modules/
 client/.pnp
 .pnp.js

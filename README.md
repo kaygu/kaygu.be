@@ -1,6 +1,6 @@
-## Kaygu.be
+# Kaygu.be
 
-# Learning Docs
+## Learning Docs
 - https://openclassrooms.com/fr/courses/4664381-realisez-une-application-web-avec-react-js
 - https://www.freecodecamp.org/news/portfolio-app-using-react-618814e35843/
 - https://fr.reactjs.org/docs/getting-started.html
