@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
-import Social from './Social';
 
-function Footer() {
+function Social() {
+    const social = [
+        {id: 1, name: "LinkedIn", link: "https://www.linkedin.com/in/camille-de-neef-60890a2b"},
+        {id: 2, name: "GitHub", link: "https://github.com/kaygu"},
+        {id: 3, name: "Twitter", link: "https://twitter.com/kaaygu"},
+        {id: 4, name: "Twitch", link: "https://www.twitch.tv/kaygu"}
+        //add logo
+    ];
+    const content = social.map((social) => 
+        <li key={social.id}><a href={social.link}>{social.name}</a></li>
+    );
     return (
         <ul>
-            <li>LinkedIn</li>
-            <li>GitHub</li>
-            <li>Twitter</li>
-            <li>Twitch</li>
+            {content}
         </ul>
     );
 }
 
-export default Footer;
+export default Social;

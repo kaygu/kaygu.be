@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import TestComponent from './components/testComponent';
 import Header from './components/header/Header';
-import Footer from './components/footer/Footer'
+import Footer from './components/footer/Footer';
+
+import Clock from './components/ClockSeconds';
+import Toggle from './components/Toggle';
+import Home from './components/home/Home';
 
 class App extends React.Component {
     render() {
     return (
         <React.Fragment>
             <Header />
-            <TestComponent />
+            <Home />
+            <Clock />
             <Footer />
         </React.Fragment>
     );

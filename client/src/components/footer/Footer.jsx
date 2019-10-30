@@ -7,6 +7,6 @@ function Footer() {
             <Social />
         </footer>
     );
-}
+};
 
 export default Footer;
