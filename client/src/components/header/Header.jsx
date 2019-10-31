@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import Background from './Background';
-import Navbar from './Navbar';
+import React from 'react';
+
+
+import Menu from './Menu';
 
 function Header() {
     return (
         <header>
-            <Background />
-            <Navbar />
+            <Menu />
         </header>
     );
 }
