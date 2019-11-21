@@ -1,6 +1,8 @@
 import React from 'react';
 import {Navbar, Button, Classes, Alignment} from '@blueprintjs/core'
 
+import Theming from './Theme'
+
 function Menu() {
     const menu = [
         {id: 1, name: "Blog", link: "/blog", icon: "edit"},
@@ -24,7 +26,7 @@ function Menu() {
                     <Button
                         href="/"
                         key={0}
-                        className={Classes.MINIMAL}
+                        className={Classes.MINIMAL + ' ' + Classes.LARGE}
                     >
                         Kaygu
                         {/* Todo : replace website name by logo */}
@@ -34,6 +36,8 @@ function Menu() {
                 {content}
             </Navbar.Group>
             <Navbar.Group align={Alignment.RIGHT}>
+                <Theming />
+                <Navbar.Divider />
                 <Button
                         href="/login"
                         key={4}
