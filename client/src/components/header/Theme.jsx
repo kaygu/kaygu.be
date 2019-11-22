@@ -1,13 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import {Classes, Button, Switch} from '@blueprintjs/core';
+import {Classes, Switch} from '@blueprintjs/core';
 
-document.body.classList.add('bp3-dark')
 
 function Theming() {
-    const [theme, Settheme] = useState('dark')
+    const [darkTheme, setDarkTheme] = useState(false) //true = dark theme / false = light theme
+
+    //On mount, check local storage
+    useEffect(() => {
+        if (localStorage.getItem('dark-theme') === 'true') {
+            setDarkTheme(true)
+        }
+    }, [darkTheme]);
+
+    function toggle() {
+        setDarkTheme(!darkTheme)
+        localStorage.setItem('dark-theme', JSON.stringify(!darkTheme))
+        console.log(darkTheme)
+    };
+
     return (
         <Switch
-            onChange={Settheme}
+            onChange={toggle}
             className={Classes.LARGE + ' theme-switch'}
         />
     );
