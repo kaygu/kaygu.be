@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Classes, Switch} from '@blueprintjs/core';
 
 
 function Theming() {
@@ -19,10 +18,7 @@ function Theming() {
     };
 
     return (
-        <Switch
-            onChange={toggle}
-            className={Classes.LARGE + ' theme-switch'}
-        />
+        <p>Light / dark mode </p>
     );
 }
 

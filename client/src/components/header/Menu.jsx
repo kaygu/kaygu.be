@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Button, Classes, Alignment} from '@blueprintjs/core'
+import {AppBar, Button, Switch, Toolbar, Typography} from '@material-ui/core'
 
 import Theming from './Theme'
 
@@ -13,41 +13,21 @@ function Menu() {
         <Button
             href={pages.link}
             key={pages.id}
-            className={Classes.MINIMAL}
             icon={pages.icon}
         >
             {pages.name}
         </Button>
     );
     return (
-        <Navbar>
-            <Navbar.Group align={Alignment.LEFT}>
-                <Navbar.Heading>
-                    <Button
-                        href="/"
-                        key={0}
-                        className={Classes.MINIMAL + ' ' + Classes.LARGE}
-                    >
-                        Kaygu
-                        {/* Todo : replace website name by logo */}
-                    </Button>
-                </Navbar.Heading>
-                <Navbar.Divider />
+        <AppBar position="static" color="default">
+            <Toolbar >
+                <Typography variant="h5" color="inherit">
+                    Kaygu.be
+                </Typography>
                 {content}
-            </Navbar.Group>
-            <Navbar.Group align={Alignment.RIGHT}>
-                <Theming />
-                <Navbar.Divider />
-                <Button
-                        href="/login"
-                        key={4}
-                        className={Classes.MINIMAL}
-                        icon="user"
-                >
-                    Login
-                </Button>
-            </Navbar.Group>
-        </Navbar>
+                <Button>Login</Button>
+            </Toolbar>
+        </AppBar>
             
     );
 }
