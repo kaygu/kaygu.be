@@ -1,11 +1,11 @@
 import React from 'react';
-
+import {} from '@material-ui/core'
 import Menu from './Menu';
 
-function Header() {
+function Header({onToggleTheme}) {
     return (
         <header>
-            <Menu />
+                <Menu toggleTheme={onToggleTheme}/>
         </header>
     );
 }
