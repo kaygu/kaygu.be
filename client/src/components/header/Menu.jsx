@@ -95,7 +95,7 @@ function NavBar({toggleTheme}) {
     
     return (
         <nav className={classes.root}>
-            <AppBar position="fixed" color="default">
+            <AppBar position="sticky" color="default">
                 <Toolbar >
                     {matches ? (
                         <div>
