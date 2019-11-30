@@ -3,7 +3,7 @@ import {Link, Typography} from '@material-ui/core'
 
 function Copyright() {
     return (
-        <Typography variant="body2">
+        <Typography variant="body2" color="textSecondary">
             {'Copyright © '}
             <Link color="inherit" href=".">
                 Kaygu.be

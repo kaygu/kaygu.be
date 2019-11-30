@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from '@material-ui/core'
 
 function Social() {
     const social = [
@@ -9,7 +10,7 @@ function Social() {
         //add logo
     ];
     const content = social.map((social) => 
-        <li key={social.id}><a href={social.link}>{social.name}</a></li>
+        <li key={social.id}><Link href={social.link}>{social.name}</Link></li>
     );
     return (
         <ul>
