@@ -1,22 +1,33 @@
-import React from 'react';
-import './App.css';
+import React, {useState} from 'react';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Home from './components/home/Home';
 
-import Clock from './components/ClockSeconds';
+function App() {
+    const [theme, setTheme] = useState({
+        palette: {
+            type: "dark"
+        }
+    });
 
-class App extends React.Component {
-    render() {
+    const toggleTheme = () => {
+        let newPaletteType = theme.palette.type === "light" ? "dark" : "light";
+        setTheme({
+            palette: {
+                type: newPaletteType
+            }
+        });
+    };
+    const muiTheme = createMuiTheme(theme);
+
     return (
-        <React.Fragment>
-            <Header />
+        <ThemeProvider theme={muiTheme}>
+            <Header onToggleTheme={toggleTheme}/>
             <Home />
-            <Clock />
             <Footer />
-        </React.Fragment>
+        </ThemeProvider>
     );
-  }
 }
 
 export default App;
