@@ -95,7 +95,7 @@ function NavBar({toggleTheme}) {
     
     return (
         <nav className={classes.root}>
-            <AppBar position="sticky" color="default">
+            <AppBar position="fixed" color="default">
                 <Toolbar >
                     {matches ? (
                         <div>
@@ -113,6 +113,7 @@ function NavBar({toggleTheme}) {
                     </div>
                 </Toolbar>
             </AppBar>
+            <Toolbar /> {/* Prevent that content from <main> goes under AppBar */}
         </nav>
         );
     }
