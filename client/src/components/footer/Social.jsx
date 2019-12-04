@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from '@material-ui/core'
+import {Link, List, ListItem, ListItemText, Tooltip} from '@material-ui/core'
 
 function Social() {
     const social = [
@@ -10,12 +10,16 @@ function Social() {
         //add logo
     ];
     const content = social.map((social) => 
-        <li key={social.id}><Link href={social.link}>{social.name}</Link></li>
+        <ListItem button key={social.id} component="a" href={social.link}>
+            <Tooltip title={social.name}>
+                <ListItemText primary='test' />
+            </Tooltip>
+        </ListItem>
     );
     return (
-        <ul>
+        <List>
             {content}
-        </ul>
+        </List>
     );
 }
 
