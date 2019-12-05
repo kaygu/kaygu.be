@@ -1,7 +1,18 @@
 import React from 'react';
+import {makeStyles} from '@material-ui/core/styles'
 import {Link, List, ListItem, ListItemText, Tooltip} from '@material-ui/core'
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginRight: 'auto', //marche po
+    }
+}));
+
 function Social() {
+    const classes = useStyles()
+
     const social = [
         {id: 1, name: "LinkedIn", link: "https://www.linkedin.com/in/camille-de-neef-60890a2b"},
         {id: 2, name: "GitHub", link: "https://github.com/kaygu"},
@@ -17,7 +28,7 @@ function Social() {
         </ListItem>
     );
     return (
-        <List>
+        <List className={classes.root}>
             {content}
         </List>
     );
