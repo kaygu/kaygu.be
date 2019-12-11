@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container} from '@material-ui/core'
-import Social from './Social';
+import Social from '../SocialNet';
 import Copyright from './Copyright'
 
 const useStyles = makeStyles(theme => ({

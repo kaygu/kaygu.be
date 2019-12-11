@@ -6,8 +6,9 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary">
             {'Copyright © '}
             <Link color="inherit" href=".">
-                Kaygu.be
-            </Link>{' '}
+                {window.location.hostname}
+            </Link>
+            {' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
