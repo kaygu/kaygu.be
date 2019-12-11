@@ -6,7 +6,7 @@ import Copyright from './Copyright'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        padding: theme.spacing(3, 2),
+        padding: theme.spacing(2, 2),
         marginTop: 'auto',
         backgroundColor:
             theme.palette.type === 'dark' ? theme.palette.grey[800] : theme.palette.grey[200],
@@ -18,10 +18,10 @@ function Footer() {
 
     return (
         <footer className={classes.root}>
+            <Social />
             <Container maxWidth="sm">
-                <Social />
                 <Copyright />
-            </Container>  
+            </Container>
         </footer>
     );
 };

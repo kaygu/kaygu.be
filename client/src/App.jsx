@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import './App.css'
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
-import Home from './components/home/Home';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/pages/Home';
 
 function App() {
     const [theme, setTheme] = useState({

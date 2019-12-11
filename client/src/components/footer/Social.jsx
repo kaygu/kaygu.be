@@ -1,16 +1,16 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles'
-import {List, ListItem, ListItemIcon, Tooltip} from '@material-ui/core'
+import {List, ListItemIcon, Tooltip} from '@material-ui/core'
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginRight: 'auto', //marche po
+        display: "flex",
+        justifyContent: "flex-end",
     },
     icon: {
         fontSize: 25,
+        fill: theme.palette.type === 'dark' ? theme.palette.grey[400] : theme.palette.grey[600],
     }
 }));
 
@@ -25,15 +25,17 @@ function Social() {
         //add logo
     ];
     const content = social.map((social) => 
-        <ListItem button key={social.id} component="a" href={social.link}>
+        <li key={social.id}>
             <Tooltip title={social.name}>
-                <ListItemIcon>
-                    <SvgIcon className={classes.icon} viewBox="0 0 24 24">
-                        <path d={social.SvgIcon} />
-                    </SvgIcon>
-                </ListItemIcon>
+                <a href={social.link}>
+                    <ListItemIcon>
+                        <SvgIcon className={classes.icon} viewBox="0 0 24 24">
+                            <path d={social.SvgIcon} />
+                        </SvgIcon>
+                    </ListItemIcon>
+                </a>
             </Tooltip>
-        </ListItem>
+        </li>
     );
     return (
         <List className={classes.root}>
