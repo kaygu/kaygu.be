@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     },
     icon: {
         
-        fontSize: 70,
+        fontSize: 50,
         margin: 'auto',
         //padding: theme.spacing(1),
         fill: theme.palette.type === 'dark' ? theme.palette.grey[400] : theme.palette.grey[600],
