@@ -79,7 +79,7 @@ function ResponsiveMenu() {
 
 function NavBar({toggleTheme}) {
     const classes= useStyles()
-    const matches = useMediaQuery(theme => theme.breakpoints.up('sm'));
+    const matches = useMediaQuery(theme => theme.breakpoints.up('sm')); //responsive menu for small screens
     
     const content = menu.map((pages) => 
         <Button
