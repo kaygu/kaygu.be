@@ -33,7 +33,7 @@ function Social() {
                 <Tooltip title={social.name}>
                     <ListItemIcon>
                         <SvgIcon className={classes.icon} viewBox={social.viewbox}>
-                            <path d={social.svgIcon} />
+                            <path d={social.svgIcon} /> {/* find proper way here */}
                         </SvgIcon>
                     </ListItemIcon>
                     </Tooltip>
