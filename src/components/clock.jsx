@@ -14,10 +14,8 @@ function Clock (props) {
   }
   
   return (
-    <div>
-      <h2>It is {date.toLocaleTimeString()}.</h2>
-    </div>
-    );
-  }
+    <span className={props.className}>{date.toLocaleTimeString()}</span>
+  );
+}
   
-  export default Clock;
+export default Clock;
