@@ -1,30 +1,35 @@
 import React from 'react';
+
 import useKeyboardEvent from '../useKeyboardEvent';
+import Stats from './Stats';
+
+// game
 import Snake from './Snake';
 import Board from './Board';
 
-const SIZE_X = 20;
-const SIZE_Y = 20;
+const SIZE_X = 10;
+const SIZE_Y = 10;
 const SPRITE_SIZE = 50;
-const GAME_SPEED = 5;
+const GAME_SPEED = 4;
 
-function Game(props) {
+var board = new Board(SIZE_X, SIZE_Y, SPRITE_SIZE);
+var s = new Snake(SIZE_X, SIZE_Y, SPRITE_SIZE);
+
+function SnakeGame(props) {
   const canvasRef = React.useRef(null);
-  var board = new Board(SIZE_X, SIZE_Y, SPRITE_SIZE);
-  var s = new Snake(SIZE_X, SIZE_Y, SPRITE_SIZE);
   
   const HandleKeypres = () => {
       useKeyboardEvent('ArrowUp', () => {
-        s.setDirection('up');
+        s.queueDirection('up');
       });
       useKeyboardEvent('ArrowDown', () => {
-        s.setDirection('down');
+        s.queueDirection('down');
       });
       useKeyboardEvent('ArrowRight', () => {
-        s.setDirection('right');
+        s.queueDirection('right');
       });
       useKeyboardEvent('ArrowLeft', () => {
-        s.setDirection('left');
+        s.queueDirection('left');
       });
   }
   HandleKeypres();
@@ -50,7 +55,7 @@ function Game(props) {
 
         // game
         s.update();
-        console.log(s.size)
+        // setSnakeLen(s.size);
         // draw
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         board.draw(ctx);
@@ -66,10 +71,13 @@ function Game(props) {
   });
 
   return(
-    <canvas ref={canvasRef} {...props}>
-      Canvas is not supported on this browser
-    </canvas>
+    <div>
+      <Stats snake={s} gameSpeed={GAME_SPEED} />
+      <canvas ref={canvasRef} {...props}>
+       Canvas is not supported on this browser
+      </canvas>
+    </div>
   );
 }
 
-export default Game;
+export default SnakeGame;

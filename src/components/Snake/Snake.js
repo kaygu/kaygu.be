@@ -6,6 +6,9 @@ class Snake {
     // snake
     this.tail = []; // index 0 == head; index -1 == tail;
     this.direction = [];
+    this.directionS = '';
+    this.queue = [];
+
     this.apple = [];
 
     // game size & sprite size
@@ -25,8 +28,12 @@ class Snake {
   }
 
   spawnSnake() {
+    // set snake tail
     this.tail = [[5, 4], [4, 4], [3, 4], [2, 4]];
+
+    // set direction
     this.direction = [1, 0];
+    this.directionS = 'right'
   }
 
   spawnApple() {
@@ -53,8 +60,31 @@ class Snake {
     return this.tail.length;
   }
 
+  queueDirection(d) {
+    // check if direction is different
+    let current_dir = this.directionS;
+     
+    if (this.queue.length) {
+      current_dir = this.queue[this.queue.length -1];
+      if (d === current_dir) {
+        return;
+      }
+      
+    } else if (d === this.directionS) {
+      return;
+    }
+
+    if ((d === 'up' && current_dir === 'down') || (d === 'down' && current_dir === 'up') || 
+      (d === 'left' && current_dir === 'right') || (d === 'right' && current_dir === 'left')) {
+        return;
+    }
+    if (d === 'up' || d === 'down' || d === 'left' || d === 'right') {
+      this.queue.push(d);
+    }
+  }
+
   setDirection(d) {
-    // check if direction is different ? 
+    // check if direction is different ?
     switch(d) {
       case 'up':
         this.direction = [0, -1];
@@ -62,23 +92,29 @@ class Snake {
       case 'down':
         this.direction = [0, 1];
         break;
-      case 'right':
-        this.direction = [1, 0];
-        break;
       case 'left':
         this.direction = [-1, 0];
+        break;
+      case 'right':
+        this.direction = [1, 0];
         break;
       default:
         return;
     }
+    this.directionS = d
   }
 
   update() {
     // add head with unshift() and remove tail with pop()
     // check if eats apple
 
-    if (!this.alive)
-      return;
+    if (!this.alive) {
+       return;
+    }
+
+    if (this.queue.length) {
+      this.setDirection(this.queue.shift());
+    }
     
     let x = this.tail[0][0] + this.direction[0];
     let y = this.tail[0][1] + this.direction[1];
