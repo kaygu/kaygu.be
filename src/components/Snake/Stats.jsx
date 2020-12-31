@@ -17,7 +17,9 @@ function Stats(props) {
 
   return (
     <div key={snakeSize}>
-     Score: {' ' + snakeSize}
+      Highest Score: {' ' + props.snake.bestScore}
+      <br />
+      Score: {' ' + snakeSize}   
     </div>
   )
 }

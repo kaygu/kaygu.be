@@ -3,13 +3,16 @@
 
 class Snake {
   constructor(width, heigt, sprite_size) {
-    // snake
     this.tail = []; // index 0 == head; index -1 == tail;
+    this.apple = [];
+
     this.direction = [];
     this.directionS = '';
     this.queue = [];
 
-    this.apple = [];
+    this.bestScore = 4; // snake starts with length of 4
+    
+
 
     // game size & sprite size
     this.WIDTH = width;
@@ -19,7 +22,6 @@ class Snake {
 
     // start game
     this.startGame();
-    
   }
 
   startGame() {
@@ -28,13 +30,20 @@ class Snake {
     this.spawnApple();
   }
 
+  restart() {
+    if (!this.alive) {
+      this.startGame();
+    }
+  }
+
   spawnSnake() {
     // set snake tail
     this.tail = [[5, 4], [4, 4], [3, 4], [2, 4]];
 
     // set direction
     this.direction = [1, 0];
-    this.directionS = 'right'
+    this.directionS = 'right';
+    this.queue = []; // reset direction queue
   }
 
   spawnApple() {
@@ -125,6 +134,10 @@ class Snake {
       this.spawnApple();
     } else {
       this.tail.pop();
+    }
+
+    if (this.bestScore < this.length) {
+      this.bestScore = this.length;
     }
     
     this.checkCollisions(x, y);

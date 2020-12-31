@@ -29,6 +29,9 @@ function SnakeGame(props) {
       useKeyboardEvent('ArrowLeft', () => {
         s.queueDirection('left');
       });
+      useKeyboardEvent('Enter', () => {
+        s.restart();
+      });
   }
   HandleKeypres();
 
