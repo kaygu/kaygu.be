@@ -15,6 +15,7 @@ class Snake {
     this.WIDTH = width;
     this.HEIGHT = heigt;
     this.SPRITE = sprite_size;
+    this.OFFSET = sprite_size;
 
     // start game
     this.startGame();
@@ -56,24 +57,24 @@ class Snake {
     }
   }
 
-  get size() {
+  get length() {
     return this.tail.length;
   }
 
   queueDirection(d) {
-    // check if direction is different
     let current_dir = this.directionS;
      
+    // check if directions do not repeat
     if (this.queue.length) {
       current_dir = this.queue[this.queue.length -1];
       if (d === current_dir) {
         return;
       }
-      
     } else if (d === this.directionS) {
       return;
     }
 
+    // check if directions are not oposite
     if ((d === 'up' && current_dir === 'down') || (d === 'down' && current_dir === 'up') || 
       (d === 'left' && current_dir === 'right') || (d === 'right' && current_dir === 'left')) {
         return;
@@ -130,16 +131,26 @@ class Snake {
   }
 
   draw(ctx) {
-    ctx.fillStyle = 'Red';
-    ctx.fillRect(this.apple[0] * this.SPRITE, this.apple[1] * this.SPRITE, this.SPRITE, this.SPRITE);
+    // draw BOARD
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    for (let i = 0; i < this.WIDTH; i++) {
+      for (let j = 0; j < this.HEIGHT; j++) {
+        ctx.strokeRect(i * this.SPRITE + this.OFFSET, j * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
+      }
+    }
 
+    // draw APPLE
+    ctx.fillStyle = 'Red';
+    ctx.fillRect(this.apple[0] * this.SPRITE + this.OFFSET, this.apple[1] * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
+
+    // draw SNAKE
     ctx.fillStyle = "Blue";
     for (let i = 1; i < this.tail.length; i++) {
-      ctx.fillRect(this.tail[i][0] * this.SPRITE, this.tail[i][1] * this.SPRITE, this.SPRITE, this.SPRITE);
+      ctx.fillRect(this.tail[i][0] * this.SPRITE + this.OFFSET, this.tail[i][1] * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
     }
 
     ctx.fillStyle = "Yellow";
-    ctx.fillRect(this.tail[0][0] * this.SPRITE, this.tail[0][1] * this.SPRITE, this.SPRITE, this.SPRITE);
+    ctx.fillRect(this.tail[0][0] * this.SPRITE + this.OFFSET, this.tail[0][1] * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
   }
 }
 

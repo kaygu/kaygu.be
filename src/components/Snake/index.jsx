@@ -5,14 +5,12 @@ import Stats from './Stats';
 
 // game
 import Snake from './Snake';
-import Board from './Board';
 
 const SIZE_X = 10;
 const SIZE_Y = 10;
 const SPRITE_SIZE = 50;
 const GAME_SPEED = 4;
 
-var board = new Board(SIZE_X, SIZE_Y, SPRITE_SIZE);
 var s = new Snake(SIZE_X, SIZE_Y, SPRITE_SIZE);
 
 function SnakeGame(props) {
@@ -39,26 +37,24 @@ function SnakeGame(props) {
     const ctx = canvas.getContext('2d');
 
     let animationFrameId;
-    let previousPerf = performance.now();
+    let previous = performance.now();
     const interval = 1000 / GAME_SPEED;
 
-    ctx.canvas.width  = SIZE_X * SPRITE_SIZE;
-    ctx.canvas.height = SIZE_Y * SPRITE_SIZE;
+    // canvas = board size + offset
+    ctx.canvas.width  = SIZE_X * SPRITE_SIZE + 2 * SPRITE_SIZE;
+    ctx.canvas.height = SIZE_Y * SPRITE_SIZE + 2 * SPRITE_SIZE;
 
     
     const render = () => {
       // handle refresh rate
       let now = performance.now();
-      let deltaT = now - previousPerf;
+      let deltaT = now - previous;
       if (deltaT > interval) {
-        previousPerf = now - (deltaT % interval);
+        previous = now - (deltaT % interval);
 
         // game
         s.update();
-        // setSnakeLen(s.size);
         // draw
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        board.draw(ctx);
         s.draw(ctx);
       }
       animationFrameId = window.requestAnimationFrame(render);

@@ -1,12 +1,12 @@
 import React from 'react';
 
 function Stats(props) {
-  const [snakeSize, setSnakeSize] = React.useState(props.snake.size);
+  const [snakeSize, setSnakeSize] = React.useState(props.snake.length);
 
   React.useEffect(() => {
     let interval = setInterval(() => {
-      if (snakeSize !== props.snake.size) {
-        setSnakeSize(props.snake.size);
+      if (snakeSize !== props.snake.length) {
+        setSnakeSize(props.snake.length);
       }
     }, 1000/ (props.gameSpeed * 2));
     
