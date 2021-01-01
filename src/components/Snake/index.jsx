@@ -8,8 +8,8 @@ import Snake from './Snake';
 
 const SIZE_X = 10;
 const SIZE_Y = 10;
-const SPRITE_SIZE = 50;
-const GAME_SPEED = 4;
+const SPRITE_SIZE = 40;
+const GAME_SPEED = 3;
 
 var s = new Snake(SIZE_X, SIZE_Y, SPRITE_SIZE);
 

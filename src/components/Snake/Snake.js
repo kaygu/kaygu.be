@@ -10,7 +10,7 @@ class Snake {
     this.directionS = '';
     this.queue = [];
 
-    this.bestScore = 4; // snake starts with length of 4
+    this.bestScore = 0;
     
 
 
@@ -66,8 +66,8 @@ class Snake {
     }
   }
 
-  get length() {
-    return this.tail.length;
+  get score() {
+    return this.tail.length -4;
   }
 
   queueDirection(d) {
@@ -136,8 +136,8 @@ class Snake {
       this.tail.pop();
     }
 
-    if (this.bestScore < this.length) {
-      this.bestScore = this.length;
+    if (this.bestScore < this.score) {
+      this.bestScore = this.score;
     }
     
     this.checkCollisions(x, y);
