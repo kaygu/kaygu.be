@@ -17,6 +17,7 @@ class Snake {
     // game size & sprite size
     this.WIDTH = width;
     this.HEIGHT = heigt;
+    this.GRID_SIZE = width * heigt;
     this.SPRITE = sprite_size;
     this.OFFSET = sprite_size;
 
@@ -26,19 +27,21 @@ class Snake {
 
   startGame() {
     this.alive = true;
+    this.gameWon = false;
+    this.nbSteps = 0;
     this.spawnSnake();
     this.spawnApple();
   }
 
   restart() {
-    if (!this.alive) {
+    if (!this.alive || this.gameWon) {
       this.startGame();
     }
   }
 
   spawnSnake() {
     // set snake tail
-    this.tail = [[5, 4], [4, 4], [3, 4], [2, 4]];
+    this.tail = [[3, 0], [2, 0], [1, 0], [0, 0]];
 
     // set direction
     this.direction = [1, 0];
@@ -48,6 +51,10 @@ class Snake {
 
   spawnApple() {
     // This may be bad in late game where only a few spots are available
+    if (this.tail.length === this.GRID_SIZE) {
+      return;
+    }
+
     let apple = [Math.floor(Math.random() * this.WIDTH), Math.floor(Math.random() * this.HEIGHT)];
     if (!JSON.stringify(this.tail).includes(JSON.stringify(apple))) {
       this.apple = apple;
@@ -56,7 +63,7 @@ class Snake {
     }
   }
 
-  checkCollisions(x, y) {
+  checkCollisions() {
     // check if bites himself
     // check if hits border
     if (JSON.stringify(this.tail.slice(1)).includes(JSON.stringify(this.tail[0]))) {
@@ -118,7 +125,7 @@ class Snake {
     // add head with unshift() and remove tail with pop()
     // check if eats apple
 
-    if (!this.alive) {
+    if (!this.alive || this.gameWon) {
        return;
     }
 
@@ -136,22 +143,23 @@ class Snake {
       this.tail.pop();
     }
 
+    // check if perfect snake
+    if (this.tail.length === this.GRID_SIZE) {
+      this.gameWon = true;
+    }
+    this.nbSteps++;
     if (this.bestScore < this.score) {
       this.bestScore = this.score;
     }
     
-    this.checkCollisions(x, y);
+    this.checkCollisions();
   }
 
   draw(ctx) {
     // draw BOARD
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    for (let i = 0; i < this.WIDTH; i++) {
-      for (let j = 0; j < this.HEIGHT; j++) {
-        ctx.strokeRect(i * this.SPRITE + this.OFFSET, j * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
-      }
-    }
-
+    ctx.strokeRect(this.OFFSET, this.OFFSET, this.WIDTH * this.SPRITE, this.HEIGHT * this.SPRITE)
+    
     // draw APPLE
     ctx.fillStyle = 'Red';
     ctx.fillRect(this.apple[0] * this.SPRITE + this.OFFSET, this.apple[1] * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);

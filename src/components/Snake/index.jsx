@@ -47,7 +47,7 @@ function SnakeGame(props) {
     ctx.canvas.width  = SIZE_X * SPRITE_SIZE + 2 * SPRITE_SIZE;
     ctx.canvas.height = SIZE_Y * SPRITE_SIZE + 2 * SPRITE_SIZE;
 
-    
+    s.draw(ctx);
     const render = () => {
       // handle refresh rate
       let now = performance.now();
