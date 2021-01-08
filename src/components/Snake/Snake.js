@@ -18,7 +18,8 @@ class Snake {
     this.WIDTH = width;
     this.HEIGHT = heigt;
     this.GRID_SIZE = width * heigt;
-    this.SPRITE = sprite_size;
+    this.SPRITE = sprite_size -6;
+    this.TILE_SIZE = sprite_size;
     this.OFFSET = sprite_size;
 
     // start game
@@ -156,22 +157,68 @@ class Snake {
   }
 
   draw(ctx) {
+    const TilePos = (n) => {
+      return n * this.TILE_SIZE + this.OFFSET;
+    }
+    const SpritePos = (n) => {
+      return n * this.TILE_SIZE + this.OFFSET + (this.TILE_SIZE - this.SPRITE) / 2;
+    }
     // draw BOARD
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.strokeRect(this.OFFSET, this.OFFSET, this.WIDTH * this.SPRITE, this.HEIGHT * this.SPRITE)
+    ctx.lineWidth = '4';
+    ctx.strokeRect(this.OFFSET, this.OFFSET, this.WIDTH * this.TILE_SIZE, this.HEIGHT * this.TILE_SIZE)
     
     // draw APPLE
     ctx.fillStyle = 'Red';
-    ctx.fillRect(this.apple[0] * this.SPRITE + this.OFFSET, this.apple[1] * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
+    ctx.fillRect(SpritePos(this.apple[0]), SpritePos(this.apple[1]), this.SPRITE, this.SPRITE);
 
-    // draw SNAKE
-    ctx.fillStyle = "Blue";
+    // draw TAIL
+    ctx.fillStyle = 'Blue';
     for (let i = 1; i < this.tail.length; i++) {
-      ctx.fillRect(this.tail[i][0] * this.SPRITE + this.OFFSET, this.tail[i][1] * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
+      if (i === this.tail.length -1) {
+        if (this.tail[i][0] < this.tail[i-1][0] || this.tail[i-1][0] < this.tail[i][0]) {
+          ctx.fillRect(TilePos(this.tail[i][0]), SpritePos(this.tail[i][1]), this.TILE_SIZE, this.SPRITE);
+        } else {
+          ctx.fillRect(SpritePos(this.tail[i][0]), TilePos(this.tail[i][1]), this.SPRITE, this.TILE_SIZE);
+        }
+      } else {
+        if ((this.tail[i-1][0] < this.tail[i][0] && this.tail[i][0] < this.tail[i+1][0]) ||
+         (this.tail[i+1][0] < this.tail[i][0] && this.tail[i][0] < this.tail[i-1][0])) {
+          ctx.fillRect(TilePos(this.tail[i][0]), SpritePos(this.tail[i][1]), this.TILE_SIZE, this.SPRITE);
+        } else if ((this.tail[i-1][1] < this.tail[i][1] && this.tail[i][1] < this.tail[i+1][1]) ||
+         (this.tail[i+1][1] < this.tail[i][1] && this.tail[i][1] < this.tail[i-1][1])) {
+          ctx.fillRect(SpritePos(this.tail[i][0]), TilePos(this.tail[i][1]), this.SPRITE, this.TILE_SIZE);
+        } else {
+           // snake turns
+          ctx.fillRect(SpritePos(this.tail[i][0]), SpritePos(this.tail[i][1]), this.SPRITE, this.SPRITE);
+          if (this.tail[i][0] < this.tail[i+1][0] || this.tail[i][0] < this.tail[i-1][0]) {
+            ctx.fillRect(SpritePos(this.tail[i][0]) +this.SPRITE, SpritePos(this.tail[i][1]), (this.TILE_SIZE-this.SPRITE)/2, this.SPRITE);
+          }
+          if (this.tail[i+1][0] < this.tail[i][0] || this.tail[i-1][0] < this.tail[i][0]) {
+            ctx.fillRect(TilePos(this.tail[i][0]), SpritePos(this.tail[i][1]), (this.TILE_SIZE-this.SPRITE)/2, this.SPRITE);
+          }
+          if (this.tail[i][1] < this.tail[i+1][1] || this.tail[i][1] < this.tail[i-1][1]) {
+            ctx.fillRect(SpritePos(this.tail[i][0]), SpritePos(this.tail[i][1]) +this.SPRITE, this.SPRITE, (this.TILE_SIZE-this.SPRITE)/2);
+          }
+          if (this.tail[i+1][1] < this.tail[i][1] || this.tail[i-1][1] < this.tail[i][1]) {
+            ctx.fillRect(SpritePos(this.tail[i][0]), TilePos(this.tail[i][1]), this.SPRITE, (this.TILE_SIZE-this.SPRITE)/2);
+          }
+        }
+      }
     }
-
-    ctx.fillStyle = "Yellow";
-    ctx.fillRect(this.tail[0][0] * this.SPRITE + this.OFFSET, this.tail[0][1] * this.SPRITE + this.OFFSET, this.SPRITE, this.SPRITE);
+    // draw HEAD
+    ctx.fillStyle = 'Teal';
+    ctx.fillRect(SpritePos(this.tail[0][0]), SpritePos(this.tail[0][1]), this.SPRITE, this.SPRITE);
+    ctx.fillStyle = 'Blue';
+    if (this.tail[0][0] < this.tail[1][0]) {
+      ctx.fillRect(SpritePos(this.tail[0][0]) +this.SPRITE, SpritePos(this.tail[0][1]), (this.TILE_SIZE-this.SPRITE)/2, this.SPRITE);
+    } else if (this.tail[1][0] < this.tail[0][0]) {
+      ctx.fillRect(TilePos(this.tail[0][0]), SpritePos(this.tail[0][1]), (this.TILE_SIZE-this.SPRITE)/2, this.SPRITE);
+    } else if (this.tail[0][1] < this.tail[1][1]) {
+       ctx.fillRect(SpritePos(this.tail[0][0]), SpritePos(this.tail[0][1]) +this.SPRITE, this.SPRITE, (this.TILE_SIZE-this.SPRITE)/2);
+    } else {
+      ctx.fillRect(SpritePos(this.tail[0][0]), TilePos(this.tail[0][1]), this.SPRITE, (this.TILE_SIZE-this.SPRITE)/2);
+    }
   }
 }
 
