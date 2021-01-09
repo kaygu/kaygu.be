@@ -1,13 +1,12 @@
-import './App.css';
 import SnakeGame from './components/Snake';
 
 function App() {
   return (
-    <div className="App">
+   <div className="App">
     <SnakeGame />
-    </div>
-    );
-  }
+  </div>
+  );
+}
   
-  export default App;
+export default App;
   

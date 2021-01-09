@@ -70,11 +70,16 @@ function SnakeGame(props) {
   });
 
   return(
-    <div>
-      <Stats snake={s} gameSpeed={GAME_SPEED} />
-      <canvas ref={canvasRef} {...props}>
-       Canvas is not supported on this browser
-      </canvas>
+    <div className="flex flex-col items-center xl:flex-row">
+      <div className="flex-grow">
+        <Stats snake={s} gameSpeed={GAME_SPEED} />
+      </div>
+      <div className="flex-none">
+        <canvas ref={canvasRef} {...props}>
+          Canvas is not supported on this browser
+        </canvas>
+      </div>
+      
     </div>
   );
 }
