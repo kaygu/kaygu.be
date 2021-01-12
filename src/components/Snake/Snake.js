@@ -21,6 +21,9 @@ class Snake {
     this.SPRITE = sprite_size -6;
     this.TILE_SIZE = sprite_size;
     this.OFFSET = sprite_size;
+    this.COLOR_APPLE = '#990000';
+    this.COLOR_TAIL = '#e0e0e0';
+    this.COLOR_HEAD = '#ffffff';
 
     // start game
     this.startGame();
@@ -169,11 +172,11 @@ class Snake {
     ctx.strokeRect(this.OFFSET, this.OFFSET, this.WIDTH * this.TILE_SIZE, this.HEIGHT * this.TILE_SIZE)
     
     // draw APPLE
-    ctx.fillStyle = 'Red';
+    ctx.fillStyle = this.COLOR_APPLE;
     ctx.fillRect(SpritePos(this.apple[0]), SpritePos(this.apple[1]), this.SPRITE, this.SPRITE);
 
     // draw TAIL
-    ctx.fillStyle = 'Blue';
+    ctx.fillStyle = this.COLOR_TAIL;
     for (let i = 1; i < this.tail.length; i++) {
       if (i === this.tail.length -1) {
         if (this.tail[i][0] < this.tail[i-1][0] || this.tail[i-1][0] < this.tail[i][0]) {
@@ -207,9 +210,9 @@ class Snake {
       }
     }
     // draw HEAD
-    ctx.fillStyle = 'Teal';
+    ctx.fillStyle = this.COLOR_HEAD;
     ctx.fillRect(SpritePos(this.tail[0][0]), SpritePos(this.tail[0][1]), this.SPRITE, this.SPRITE);
-    ctx.fillStyle = 'Blue';
+    ctx.fillStyle = this.COLOR_TAIL;
     if (this.tail[0][0] < this.tail[1][0]) {
       ctx.fillRect(SpritePos(this.tail[0][0]) +this.SPRITE, SpritePos(this.tail[0][1]), (this.TILE_SIZE-this.SPRITE)/2, this.SPRITE);
     } else if (this.tail[1][0] < this.tail[0][0]) {
