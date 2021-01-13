@@ -1,12 +1,12 @@
 import React from 'react';
 
 function Stats(props) {
-  const [snakeSize, setSnakeSize] = React.useState(props.snake.score);
+  const [steps, setSteps] = React.useState(props.snake.moves);
 
   React.useEffect(() => {
     let interval = setInterval(() => {
-      if (snakeSize !== props.snake.score) {
-        setSnakeSize(props.snake.score);
+      if (steps !== props.snake.moves) {
+        setSteps(props.snake.moves);
       }
     }, 1000/ (props.gameSpeed * 2));
     
@@ -18,7 +18,8 @@ function Stats(props) {
   return (
     <div className="text-gray-100 text-center">
       <h1 className="text-2xl">Highest Score: {' ' + props.snake.bestScore}</h1>
-      <h2 className="text-lg">Score: {' ' + snakeSize}</h2>   
+      <h2 className="text-lg">Score: {' ' + props.snake.score}</h2>
+      <h3>Moves: {'' + steps}</h3>
     </div>
   )
 }

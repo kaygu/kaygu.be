@@ -13,7 +13,6 @@ class Snake {
     this.bestScore = 0;
     
 
-
     // game size & sprite size
     this.WIDTH = width;
     this.HEIGHT = heigt;
@@ -32,7 +31,7 @@ class Snake {
   startGame() {
     this.alive = true;
     this.gameWon = false;
-    this.nbSteps = 0;
+    this.moves = 0;
     this.spawnSnake();
     this.spawnApple();
   }
@@ -151,7 +150,7 @@ class Snake {
     if (this.tail.length === this.GRID_SIZE) {
       this.gameWon = true;
     }
-    this.nbSteps++;
+    this.moves++;
     if (this.bestScore < this.score) {
       this.bestScore = this.score;
     }
